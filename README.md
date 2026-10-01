@@ -46,28 +46,7 @@ ln -sfn /path/to/mathcat/.grok/skills/mathcat ~/.claude/skills/mathcat
 
 `/mathcat` runs it. Asking to see a formula selects it.
 
-<details>
-<summary>Pictures, Greek ledger, and the rest of the flags</summary>
-
-<p align="center">
-  <img src="docs/quadratic.png" alt="Quadratic formula" width="420"><br>
-  <img src="docs/gaussian.png" alt="Gaussian integral" width="420"><br>
-  <img src="docs/bayes.png" alt="Bayes" width="420">
-</p>
-
-`--legend` keeps the formula white and lists each Greek letter underneath with its English name. The same letter keeps the same color every time. Letters inside the formula stay white.
-
-```bash
-mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \xi}\,d\xi'
-```
-
-<p align="center">
-  <img src="docs/legend.png" alt="Formula with a colored ledger for psi, xi, and pi" width="640">
-</p>
-
-`mathcat --help` lists the flags. `mathd` is an optional localhost service on port 8765. The skill is the full set of rules for rendering, display, and the mathtext dialect.
-
-</details>
+People who want the flags, the Greek ledger, and the pictures: [USAGE.md](USAGE.md).
 
 ## License
 

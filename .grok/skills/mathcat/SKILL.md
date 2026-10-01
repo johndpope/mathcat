@@ -11,7 +11,7 @@ description: >
 
 # mathcat
 
-Show the formula with `mathcat`. Do not send it through an image generator. Do not install TeX. The README is only the install page.
+Show the formula with `mathcat`. Do not send it through an image generator. Do not install TeX. The README is only the install page. Human usage is `USAGE.md`; follow this skill, not that file.
 
 ## Show it
 
