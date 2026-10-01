@@ -1,0 +1,11 @@
+[Unit]
+Description=mathcat formula renderer
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/mathd --host 127.0.0.1 --port 8765
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
