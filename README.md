@@ -195,4 +195,6 @@ GitHub Actions runs that on Ubuntu for Python 3.10 and 3.12.
 
 ## License
 
-MIT.
+Copyright 2026 John Pope.
+
+[Do No Harm License](LICENSE.md) (pre 1.0), the license at [raisely/NoHarm](https://github.com/raisely/NoHarm/blob/publish/LICENSE.md).

@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Local service that renders math formulas to PNG for iTerm2, WezTerm, Kitty, and Ubuntu."
 readme = "README.md"
 requires-python = ">=3.10"
-license = "MIT"
+license = { file = "LICENSE.md" }
 authors = [{ name = "John Pope" }]
 keywords = ["math", "latex", "iterm2", "imgcat", "terminal"]
 dependencies = ["matplotlib"]
