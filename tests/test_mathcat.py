@@ -1,3 +1,4 @@
+import contextlib
 import io
 import json
 import os
@@ -8,7 +9,7 @@ from http.server import ThreadingHTTPServer
 
 from mathcat.cli import main
 from mathcat.display import display_png
-from mathcat.legend import compose_legend, greek_in
+from mathcat.legend import compose_legend, greek_in, notation_in
 from mathcat.render import FormulaError, render_png
 from mathcat.server import Handler
 
@@ -95,18 +96,50 @@ class LegendTests(unittest.TestCase):
         self.assertTrue(card.startswith(b"\x89PNG"))
         self.assertGreater(len(card), len(plain))
 
-    def test_no_greek_leaves_the_formula(self):
-        tex = r"E=mc^2"
+    def test_no_notation_leaves_the_formula(self):
+        tex = r"E=mc"
         plain = render_png(tex)
         self.assertEqual(compose_legend(tex, plain), plain)
+
+    def test_scripts_alone_get_a_ledger(self):
+        tex = r"E=mc^2"
+        plain = render_png(tex)
+        self.assertGreater(len(compose_legend(tex, plain)), len(plain))
+
+    def test_accents_and_scripts_are_spoken(self):
+        spoken = [item[2] for item in notation_in(r"\hat{x}_i^2+\bar{y}+A^{-1}+f(x)^3")]
+        self.assertEqual(
+            spoken,
+            [
+                "$x$ hat",
+                r"$\hat{x}$ sub $i$",
+                r"$\hat{x}$ squared",
+                "$y$ bar",
+                "$A$ inverse",
+                "$f(x)$ cubed",
+            ],
+        )
+
+    def test_limits_read_from_and_to(self):
+        spoken = [item[2] for item in notation_in(r"\int_{0}^{1} x\,dx + \lim_{n\to\infty} a_n")]
+        self.assertEqual(
+            spoken,
+            [r"$\int$ from $0$", r"$\int$ to $1$", r"$\lim$ as $n\to\infty$", "$a$ sub $n$"],
+        )
+
+    def test_notation_is_listed_once(self):
+        self.assertEqual(len(notation_in(r"x_i+x_i+x_{i}")), 1)
 
 
 class CliTests(unittest.TestCase):
     def test_output_file(self):
         path = os.path.join(self.id().replace(".", "_") + ".png")
         try:
-            code = main(["--local", "-o", path, r"E=mc^2"])
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = main(["--local", "-o", path, r"E=mc^2"])
             self.assertEqual(code, 0)
+            self.assertEqual(out.getvalue().strip(), os.path.abspath(path))
             with open(path, "rb") as handle:
                 self.assertTrue(handle.read(8).startswith(b"\x89PNG"))
         finally:

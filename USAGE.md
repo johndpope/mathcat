@@ -16,16 +16,16 @@ On iTerm2 and WezTerm the picture is inline. Kitty draws it with the Kitty graph
   <img src="docs/bayes.png" alt="Bayes" width="420">
 </p>
 
-## Greek ledger
+## Ledger
 
-`--legend` keeps the formula white and lists each Greek letter underneath with its English name. The same letter keeps the same color every time. Letters inside the formula stay white.
+`--legend` keeps the formula white and lists each Greek letter underneath with its English name. The same letter keeps the same color every time. Letters inside the formula stay white. After the Greek, each accent, subscript, and superscript is read aloud once: "ψ hat", "x sub i", "c squared", "∫ from −∞", "∫ to ∞".
 
 ```bash
 mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \xi}\,d\xi'
 ```
 
 <p align="center">
-  <img src="docs/legend.png" alt="Formula with a colored ledger for psi, xi, and pi" width="640">
+  <img src="docs/legend.png" alt="Formula with a colored ledger for psi, xi, and pi, then the integral limits, psi hat, and the exponent" width="640">
 </p>
 
 ## A few flags
@@ -34,8 +34,8 @@ mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \x
 
 | Flag | What it does |
 | --- | --- |
-| `--legend` | English names under a formula that uses Greek |
-| `-o file.png` | Write a PNG and do not display it |
+| `--legend` | English names for Greek, accents, subscripts, and superscripts |
+| `-o file.png` | Write a PNG, print its absolute path, and do not display it |
 | `--local` | Render in this process |
 | `--bg '#12141a'` | Opaque background. The default is transparent |
 

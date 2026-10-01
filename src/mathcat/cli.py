@@ -36,7 +36,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--legend",
         action="store_true",
-        help="under a formula that uses Greek, add a colored English-name ledger",
+        help="add a ledger naming Greek letters, accents, subscripts, and superscripts",
     )
     args = parser.parse_args(argv)
     tex = " ".join(args.tex).strip()
@@ -52,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.output:
         with open(args.output, "wb") as handle:
             handle.write(png)
+        print(os.path.abspath(args.output))
         return 0
 
     out = sys.stdout.buffer

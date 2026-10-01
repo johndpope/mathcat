@@ -34,7 +34,7 @@ mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \x
 ```
 
 <p align="center">
-  <img src="docs/legend.png" alt="A formula with a colored ledger for psi, xi, and pi" width="640">
+  <img src="docs/legend.png" alt="A formula with a colored ledger for psi, xi, and pi, then the integral limits, psi hat, and the exponent" width="640">
 </p>
 
 ## For an LLM
@@ -54,7 +54,7 @@ ln -sfn /path/to/mathcat/.grok/skills/mathcat ~/.claude/skills/mathcat
 
 `/mathcat` runs it. Asking to see a formula selects it.
 
-People who want the flags, the Greek ledger, and the pictures: [USAGE.md](USAGE.md).
+People who want the flags, the ledger for Greek, accents, and scripts, and the pictures: [USAGE.md](USAGE.md).
 
 ## License
 
