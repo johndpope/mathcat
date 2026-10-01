@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="docs/hero.jpg" alt="A ribbon of light rising off a laptop on a dark desk" width="100%">
+  English · <a href="README.ja.md">日本語</a>
+</p>
+
+<p align="center">
+  <img src="docs/hero.jpg" alt="Pixel-art thriller: a laptop in the rain, a ribbon of light, and quantum formulas across the frame" width="100%">
 </p>
 
 <h1 align="center">mathcat</h1>
