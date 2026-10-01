@@ -6,7 +6,7 @@ description: >
   terminals. Use when the user asks to show, typeset, or display a formula,
   equation, LaTeX, or math in the terminal, or runs /mathcat. When Greek
   letters, accents, subscripts, or superscripts appear, use --legend for the
-  English-name ledger. Use the
+  English-name ledger. May add brief intuitive --note lines in fine print. Use the
   mathcat tools, not an image generator and not a full TeX install.
 ---
 
@@ -35,6 +35,21 @@ The formula stays white. Under it, each Greek letter that appears is listed once
 
 Do not color symbols inside the formula. mathtext has no per-symbol color, and `\color` is rejected. Skip `--legend` when there is no Greek, accent, or script; the flag then changes nothing.
 
+## Notes
+
+You may add brief intuitive notes in fine print under the formula with `--note`, one flag per line. They are small and dim, under the ledger. Use them when the reader would gain from the idea behind the symbols, not their names.
+
+```bash
+mathcat --legend \
+  --note 'Q chooses where to look.' \
+  --note 'K says where things are.' \
+  --note '$V(f_r)$ is the reference still.' \
+  --note 'An empty hand in $f_r$ stays an empty hand.' \
+  '\mathrm{Attn}(f_q,f_r)=\mathrm{softmax}\left(\frac{Q(f_q)K(f_r)^T}{\sqrt{d}}\right)V(f_r)'
+```
+
+Each note is one plain sentence, under about 60 characters, saying what a part does, not what it is called. Two to four notes at most. No restating the ledger, no equations in prose, no hedging. Put symbols between `$...$` so they render as math. Skip notes when the formula speaks for itself or the user asked for the formula alone.
+
 ## Dialect
 
 These work: fractions, roots, integrals, subscripts, superscripts, `\mathrm`, `\text`, and the Greek commands above.
@@ -53,4 +68,4 @@ Start `mathd` once. It listens on `http://127.0.0.1:8765`. Later `mathcat` calls
 
 `POST /png` with `{"tex":"..."}` returns `image/png`. In JSON a backslash is `\\`. Prefer POST. A raw `+` in a query string is a space. `GET /health` returns `{"ok":true,"service":"mathd"}`.
 
-`mathcat --local` renders in-process and ignores `mathd`. `-o file.png` writes a file, prints its absolute path, and does not display it.
+`mathcat --local` renders in-process and ignores `mathd`. `--note` works with or without `--legend`. `-o file.png` writes a file, prints its absolute path, and does not display it.

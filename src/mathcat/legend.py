@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import io
 import re
+from collections.abc import Sequence
 
 import matplotlib
 
@@ -88,6 +89,7 @@ _UNDER_OPERATORS = {"lim": "as", "max": "over", "min": "over", "sup": "over", "i
 # Superscripts with their own spoken name.
 _POWERS = {"2": "squared", "3": "cubed", "T": "transpose", r"\prime": "prime", r"\dagger": "dagger", r"\ast": "star", "*": "star", "-1": "inverse"}
 _NOTATION_COLOR = "#c9d1d9"
+_NOTE_COLOR = "#8b949e"
 _MATHTEXT = MathTextParser("path")
 
 
@@ -251,20 +253,33 @@ def _parses(text: str) -> bool:
     return True
 
 
-def compose_legend(tex: str, formula_png: bytes, *, dpi: int = 220) -> bytes:
-    """Return ``formula_png`` unchanged, or a dark card with the formula and a ledger."""
-    entries = legend_entries(tex)
-    if not entries:
+def compose_legend(
+    tex: str,
+    formula_png: bytes,
+    *,
+    dpi: int = 220,
+    legend: bool = True,
+    notes: Sequence[str] = (),
+) -> bytes:
+    """Return ``formula_png`` unchanged, or a dark card with the formula, a ledger, and notes."""
+    entries = legend_entries(tex) if legend else []
+    notes = [note.strip() for note in notes if note and note.strip()]
+    if not entries and not notes:
         return formula_png
-    formula = Image.open(io.BytesIO(formula_png)).convert("RGBA")
-    ledger = Image.open(io.BytesIO(_ledger_png(entries, dpi))).convert("RGBA")
+    parts = [Image.open(io.BytesIO(formula_png)).convert("RGBA")]
+    if entries:
+        parts.append(Image.open(io.BytesIO(_ledger_png(entries, dpi))).convert("RGBA"))
+    if notes:
+        parts.append(Image.open(io.BytesIO(_notes_png(notes, dpi))).convert("RGBA"))
     pad = max(28, dpi // 6)
     gap = max(18, dpi // 10)
-    width = max(formula.width, ledger.width) + pad * 2
-    height = pad + formula.height + gap + ledger.height + pad
+    width = max(part.width for part in parts) + pad * 2
+    height = pad * 2 + sum(part.height for part in parts) + gap * (len(parts) - 1)
     card = Image.new("RGBA", (width, height), _CARD)
-    card.paste(formula, ((width - formula.width) // 2, pad), formula)
-    card.paste(ledger, ((width - ledger.width) // 2, pad + formula.height + gap), ledger)
+    y = pad
+    for part in parts:
+        card.paste(part, ((width - part.width) // 2, y), part)
+        y += part.height + gap
     buf = io.BytesIO()
     card.save(buf, format="PNG")
     return buf.getvalue()
@@ -274,6 +289,34 @@ def render_legend_png(tex: str, **kwargs) -> bytes:
     """Formula, plus a ledger when Greek, accents, or scripts are present."""
     png = render_png(tex, **kwargs)
     return compose_legend(tex, png, dpi=kwargs.get("dpi", 220))
+
+
+def _notes_png(notes: list[str], dpi: int) -> bytes:
+    """Fine print: one short intuitive note per line, small and dim."""
+    rows = len(notes)
+    fig = plt.figure(figsize=(4.4, 0.24 * rows + 0.06), dpi=dpi)
+    fig.patch.set_alpha(0)
+    ax = fig.add_axes((0, 0, 1, 1))
+    ax.axis("off")
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    for index, note in enumerate(notes):
+        if not _parses(note):
+            note = note.replace("$", r"\$")
+        ax.text(
+            0.04,
+            1 - (index + 0.5) / rows,
+            note,
+            color=_NOTE_COLOR,
+            fontsize=8,
+            ha="left",
+            va="center",
+            fontfamily="DejaVu Sans",
+        )
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", dpi=dpi, transparent=True, bbox_inches="tight", pad_inches=0.04)
+    plt.close(fig)
+    return buf.getvalue()
 
 
 def _ledger_png(entries: list[tuple[str, str, str, str]], dpi: int) -> bytes:

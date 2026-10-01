@@ -127,6 +127,18 @@ class LegendTests(unittest.TestCase):
             [r"$\int$ from $0$", r"$\int$ to $1$", r"$\lim$ as $n\to\infty$", "$a$ sub $n$"],
         )
 
+    def test_notes_alone_make_a_card(self):
+        tex = r"E=mc"
+        plain = render_png(tex)
+        card = compose_legend(tex, plain, legend=False, notes=["Mass is energy at rest."])
+        self.assertGreater(len(card), len(plain))
+        self.assertEqual(compose_legend(tex, plain, legend=False, notes=["  "]), plain)
+
+    def test_note_with_broken_mathtext_still_renders(self):
+        tex = r"x_i"
+        card = compose_legend(tex, render_png(tex), notes=["costs $5 and $\\frac{"])
+        self.assertTrue(card.startswith(b"\x89PNG"))
+
     def test_notation_is_listed_once(self):
         self.assertEqual(len(notation_in(r"x_i+x_i+x_{i}")), 1)
 

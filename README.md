@@ -37,6 +37,19 @@ mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \x
   <img src="docs/legend.png" alt="A formula with a colored ledger for psi, xi, and pi, then the integral limits, psi hat, and the exponent" width="640">
 </p>
 
+`--note` adds a short line in fine print under the ledger. Repeat it for another line. `$...$` inside a note draws as math.
+
+```bash
+mathcat --legend \
+  --note '$\mu$ is the center of the bell.' \
+  --note '$\sigma$ is how wide the bell is.' \
+  'f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right)'
+```
+
+<p align="center">
+  <img src="docs/note.png" alt="A Gaussian with a colored ledger and two short notes under it" width="640">
+</p>
+
 ## For an LLM
 
 Do not invent a workflow from this page. Load the mathcat skill and follow it.
@@ -54,7 +67,7 @@ ln -sfn /path/to/mathcat/.grok/skills/mathcat ~/.claude/skills/mathcat
 
 `/mathcat` runs it. Asking to see a formula selects it.
 
-People who want the flags, the ledger for Greek, accents, and scripts, and the pictures: [USAGE.md](USAGE.md).
+People who want the flags, the ledger, the fine-print notes, and the pictures: [USAGE.md](USAGE.md).
 
 ## License
 

@@ -35,6 +35,7 @@ mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \x
 | Flag | What it does |
 | --- | --- |
 | `--legend` | English names for Greek, accents, subscripts, and superscripts |
+| `--note 'text'` | A short note in fine print under the formula. Repeat for more lines. `$...$` renders as math |
 | `-o file.png` | Write a PNG, print its absolute path, and do not display it |
 | `--local` | Render in this process |
 | `--bg '#12141a'` | Opaque background. The default is transparent |

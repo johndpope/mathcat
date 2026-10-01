@@ -38,13 +38,19 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="add a ledger naming Greek letters, accents, subscripts, and superscripts",
     )
+    parser.add_argument(
+        "--note",
+        action="append",
+        default=[],
+        help="a short intuitive note in fine print under the formula; repeat for more lines",
+    )
     args = parser.parse_args(argv)
     tex = " ".join(args.tex).strip()
 
     try:
         png = _render(tex, args)
-        if args.legend:
-            png = compose_legend(tex, png, dpi=args.dpi)
+        if args.legend or args.note:
+            png = compose_legend(tex, png, dpi=args.dpi, legend=args.legend, notes=args.note)
     except FormulaError as exc:
         print(f"mathcat: {exc}", file=sys.stderr)
         return 1
