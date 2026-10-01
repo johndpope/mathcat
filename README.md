@@ -29,6 +29,14 @@ mathcat 'e^{i\pi}+1=0' | imgcat
   <img src="docs/euler.png" alt="Euler's identity" width="280">
 </p>
 
+```bash
+mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \xi}\,d\xi'
+```
+
+<p align="center">
+  <img src="docs/legend.png" alt="A formula with a colored ledger for psi, xi, and pi" width="640">
+</p>
+
 ## For an LLM
 
 Do not invent a workflow from this page. Load the mathcat skill and follow it.
