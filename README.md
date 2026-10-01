@@ -50,6 +50,6 @@ People who want the flags, the Greek ledger, and the pictures: [USAGE.md](USAGE.
 
 ## License
 
-Copyright 2026 John Pope.
+Copyright 2026 John D. Pope.
 
 [Do No Harm License](LICENSE.md) (pre 1.0), the license at [raisely/NoHarm](https://github.com/raisely/NoHarm/blob/publish/LICENSE.md).

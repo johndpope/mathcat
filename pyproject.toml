@@ -5,7 +5,7 @@ description = "Local service that renders math formulas to PNG for iTerm2, WezTe
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE.md" }
-authors = [{ name = "John Pope" }]
+authors = [{ name = "John D. Pope" }]
 keywords = ["math", "latex", "iterm2", "imgcat", "terminal"]
 dependencies = ["matplotlib"]
 
