@@ -54,6 +54,25 @@ mathcat --legend \
   <img src="docs/note.png" alt="ガウス分布。色付きの凡例と、その下に短い注が二つ" width="640">
 </p>
 
+## Claude Code
+
+数式をペインに出す。端末が PNG を描き、モッドはパスだけを持つ。
+
+```bash
+claude --plugin-dir /path/to/mathcat
+```
+
+```
+/mathcat
+/mathcat e^{i\pi}+1=0
+/mathcat --legend 'e^{i\pi}+1=0'
+/mathcat drop
+```
+
+`/mathcat` でペインが開く。式を渡すと描いて残す。Prev、Next、Drop でその一覧を辿る。`--legend` と `--note` はコマンドと同じ。
+
+Ghostty か kitty、Claude Code 2.1.287 以降。ほかの画面では式とパスを文字で出す。
+
 ## LLM 向け
 
 このページから手順を作らないでください。mathcat のスキルを読み、それに従ってください。
@@ -69,7 +88,7 @@ ln -sfn /path/to/mathcat/.grok/skills/mathcat ~/.grok/skills/mathcat
 ln -sfn /path/to/mathcat/.grok/skills/mathcat ~/.claude/skills/mathcat
 ```
 
-`/mathcat` で動きます。数式を見せてと頼んでも、このスキルが選ばれます。
+数式を見せてと頼むと、このスキルが選ばれます。ペインを入れた Claude Code では `/mathcat` がそのペインです。
 
 フラグ、凡例、小さい注、図は [USAGE.md](USAGE.md)。USAGE は英語です。
 

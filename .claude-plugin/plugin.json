@@ -1,0 +1,9 @@
+{
+  "name": "mathcat",
+  "displayName": "mathcat",
+  "version": "0.1.0",
+  "description": "Draw a formula and show the PNG in a pane",
+  "author": { "name": "John D. Pope" },
+  "license": "Do No Harm",
+  "keywords": ["math", "png", "pane", "mod"]
+}

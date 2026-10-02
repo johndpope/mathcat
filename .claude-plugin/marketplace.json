@@ -1,0 +1,6 @@
+{
+  "name": "mathcat",
+  "description": "A pane that draws a formula and keeps the PNG",
+  "owner": { "name": "John D. Pope" },
+  "plugins": [{ "name": "mathcat", "source": "./" }]
+}

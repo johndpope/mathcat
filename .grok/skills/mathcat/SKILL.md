@@ -4,7 +4,8 @@ description: >
   Render a TeX-style math formula to PNG and show it inline with the iTerm2
   imgcat protocol (also WezTerm), Kitty, or a PNG file on Ubuntu and other
   terminals. Use when the user asks to show, typeset, or display a formula,
-  equation, LaTeX, or math in the terminal, or runs /mathcat. When Greek
+  equation, LaTeX, or math in the terminal, or runs /mathcat. In Claude Code
+  the plugin shows that PNG in a pane. When Greek
   letters, accents, subscripts, or superscripts appear, use --legend for the
   English-name ledger. May add brief intuitive --note lines in fine print. Use the
   mathcat tools, not an image generator and not a full TeX install.
@@ -13,6 +14,19 @@ description: >
 # mathcat
 
 Show the formula with `mathcat`. Do not send it through an image generator. Do not install TeX. The README is only the install page. Human usage is `USAGE.md`; follow this skill, not that file.
+
+## Claude Code pane
+
+If the tool `mcp__mathcat__show` is available, call it and do not also run the shell. `tex` is one formula. Set `legend` true under the Legend rules. `notes` is the fine print, under the Notes rules. The pane keeps the PNG path. The terminal draws the file.
+
+The person can type the same thing:
+
+```
+/mathcat --legend 'e^{i\pi}+1=0'
+/mathcat drop
+```
+
+`/mathcat` alone opens the pane. A captured tool shell has no such tool: follow Show it.
 
 ## Show it
 

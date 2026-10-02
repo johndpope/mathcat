@@ -54,6 +54,25 @@ mathcat --legend \
   <img src="docs/note.png" alt="A Gaussian with a colored ledger and two short notes under it" width="640">
 </p>
 
+## Claude Code
+
+A pane for the formulas. The terminal paints the PNG. The mod keeps the path.
+
+```bash
+claude --plugin-dir /path/to/mathcat
+```
+
+```
+/mathcat
+/mathcat e^{i\pi}+1=0
+/mathcat --legend 'e^{i\pi}+1=0'
+/mathcat drop
+```
+
+`/mathcat` opens the pane. A formula is drawn and kept. Prev, Next, and Drop walk that list. `--legend` and `--note` are the same flags as the command line.
+
+Ghostty or kitty, and Claude Code 2.1.287 or later. On another surface the pane shows the formula and the path.
+
 ## For an LLM
 
 Do not invent a workflow from this page. Load the mathcat skill and follow it.
@@ -69,7 +88,7 @@ ln -sfn /path/to/mathcat/.grok/skills/mathcat ~/.grok/skills/mathcat
 ln -sfn /path/to/mathcat/.grok/skills/mathcat ~/.claude/skills/mathcat
 ```
 
-`/mathcat` runs it. Asking to see a formula selects it.
+Asking to see a formula selects the skill. With the pane installed, `/mathcat` draws into it.
 
 People who want the flags, the ledger, the fine-print notes, and the pictures: [USAGE.md](USAGE.md).
 

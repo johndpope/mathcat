@@ -43,3 +43,7 @@ mathcat --legend '\psi(x)=\int_{-\infty}^{\infty}\hat{\psi}(\xi)\,e^{2\pi i x \x
 `mathd` is optional. It serves PNGs on `http://127.0.0.1:8765`. When it is running, `mathcat` uses it.
 
 One formula per call. matplotlib mathtext: fractions, roots, integrals, subscripts, superscripts, `\mathrm`, `\text`, and Greek commands. No `\begin{...}` environments, no preamble, no TikZ.
+
+## Claude Code
+
+The pane is on the [README](README.md#claude-code). `/mathcat` draws into it. The flags are the same ones in the table above.
